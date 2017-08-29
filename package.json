@@ -2,11 +2,12 @@
   "name": "gitcomment",
   "version": "0.1.0",
   "description": "add comments to your blog with github issue backend",
-  "main": "lib/index.js",
+  "main": "dist/gitcomment.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel ./src -d lib",
-    "build:watch": "babel -w ./src -d lib",
+    "build": "webpack",
+    "build:watch": "webpack --watch",
     "lint": "eslint ./src",
     "prepublish": "npm run build"
   },
@@ -15,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.5.0",
@@ -24,7 +26,8 @@
     "eslint-plugin-react": "^7.3.0",
     "prettier-eslint-cli": "^4.2.1",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1"
+    "react": "^15.6.1",
+    "webpack": "^3.5.5"
   },
   "eslintConfig": {
     "extends": "airbnb",

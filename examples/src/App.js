@@ -1,5 +1,5 @@
 import React from 'react';
-import Gitcomment from 'gitcomment';
+import Gitcomment from 'gitcomment/dist/gitcomment';
 
 // class App extends Component {
 //   render() {

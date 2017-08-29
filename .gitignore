@@ -20,7 +20,7 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
-lib
+dist
 
 # Dependency directory
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
