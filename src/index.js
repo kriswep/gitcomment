@@ -1,31 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { GraphQLClient } from 'graphql-request';
-// sadly, we need authentication even for read... so maybe api3, no graphql??
-// const client = new GraphQLClient('https://api.github.com/graphql', {
-//   headers: {
-//     Authorization: 'Bearer token..',
-//   },
-// });
+import 'whatwg-fetch';
 
-// const query = `{
-//   repository(owner: "kriswep", name: "modern-modular-javascript") {
-//     name
-//     issue(number: 2) {
-//       title
-//       bodyText
-//       comments(first:2) {
-//         edges {
-//           node {
-//             author
-//             body
-//           }
-//         }
-//       }
-//     }
-//   }
-// }`;
-// client.request(query).then(data => console.log(data));
+import makeGetJsonFrom from './getJsonFrom';
+import makeGetComments from './getComments';
+
+const getJsonFrom = makeGetJsonFrom({
+  fetch: global.fetch,
+});
+const getComments = makeGetComments({
+  getJsonFrom,
+});
+getComments({
+  repo: 'kriswep/gitcomment',
+  issueNumber: 1,
+});
 
 class Gitcomment extends Component {
   constructor(props) {
