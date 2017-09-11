@@ -9,6 +9,10 @@ import Gitcomment from 'gitcomment/dist/gitcomment';
 //   }
 // }
 
-const App = () => <Gitcomment>{name => <div>{name}</div>}</Gitcomment>;
+const App = () => (
+  <Gitcomment repo="kriswep/wetainment" issueNumber={1}>
+    {name => <div>{name}</div>}
+  </Gitcomment>
+);
 
 export default App;
