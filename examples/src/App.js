@@ -10,8 +10,16 @@ import Gitcomment from 'gitcomment/dist/gitcomment';
 // }
 
 const App = () => (
-  <Gitcomment repo="kriswep/wetainment" issueNumber={1}>
-    {name => <div>{name}</div>}
+  <Gitcomment repo="kriswep/gitcomment" issueNumber={1}>
+    {(loaded, comments) => {
+      const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
+      return (
+        <div>
+          <p>loaded: {String(loaded)}</p>
+          <ul>{commentList}</ul>
+        </div>
+      );
+    }}
   </Gitcomment>
 );
 

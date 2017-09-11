@@ -21,6 +21,7 @@ class Gitcomment extends Component {
     super(props);
     this.state = {
       loaded: false,
+      comments: [],
     };
   }
 
@@ -28,11 +29,25 @@ class Gitcomment extends Component {
     getComments({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
+    }).then((response) => {
+      const comments = response.map(comment => ({
+        id: comment.id,
+        body: comment.body,
+        created: comment.created_at,
+        updated: comment.updated_at,
+        url: comment.url,
+        author: {
+          name: comment.user.login,
+          avatar: comment.user.avatar_url,
+          url: comment.user.url,
+        },
+      }));
+      return this.setState({ loaded: true, comments });
     });
   }
 
   render() {
-    return <div>{this.props.children('gitcomment to be done!')}</div>;
+    return <div>{this.props.children(this.state.loaded, this.state.comments)}</div>;
   }
 }
 // const Gitcomment = ({ children }) => <div>{children('gitcomment to be done!')}</div>;

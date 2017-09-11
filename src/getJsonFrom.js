@@ -5,6 +5,6 @@ const makeGetJsonFrom = ({ fetch }) => uri =>
       'User-Agent': 'Gitcomment',
       Accept: 'application/vnd.github.v3.full+json',
     },
-  });
+  }).then(res => res.json());
 
 export default makeGetJsonFrom;
