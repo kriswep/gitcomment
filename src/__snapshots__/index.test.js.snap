@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getComments should render 1`] = `
+<p
+  className="loaded"
+>
+  false
+</p>
+`;
+
+exports[`getComments should render 2`] = `
+<ul
+  className="comments"
+/>
+`;
+
+exports[`getComments should render 3`] = `
+<p
+  className="loaded"
+>
+  true
+</p>
+`;
+
+exports[`getComments should render 4`] = `
+<ul
+  className="comments"
+>
+  <li
+    key="id"
+  >
+    body: 
+    body
+  </li>
+</ul>
+`;

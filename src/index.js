@@ -11,10 +11,6 @@ const getJsonFrom = makeGetJsonFrom({
 const getComments = makeGetComments({
   getJsonFrom,
 });
-// getComments({
-//   repo: 'kriswep/gitcomment',
-//   issueNumber: 1,
-// });
 
 class Gitcomment extends Component {
   constructor(props) {
