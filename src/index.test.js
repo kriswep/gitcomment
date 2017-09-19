@@ -22,7 +22,7 @@ jest.mock('./getJsonFrom', () => () => () =>
   ]),
 );
 
-test('getComments should render', (done) => {
+test('getComments should render', () => {
   const gitcomment = mount(
     <Gitcomment repo="repo" issueNumber={1}>
       {(loaded, comments) => {
@@ -36,11 +36,14 @@ test('getComments should render', (done) => {
       }}
     </Gitcomment>,
   );
+
+  // test before componentDidMount
   expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
   expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
-  setTimeout(() => {
+
+  return Promise.resolve().then(() => {
+    // test after componentDidMount
     expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
     expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
-    done();
-  }, 1);
+  });
 });
