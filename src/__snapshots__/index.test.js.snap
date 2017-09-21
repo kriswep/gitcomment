@@ -34,3 +34,11 @@ exports[`getComments should render 4`] = `
   </li>
 </ul>
 `;
+
+exports[`getComments should render 5`] = `
+<button
+  onClick={[Function]}
+>
+  Post sthg
+</button>
+`;

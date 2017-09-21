@@ -21,16 +21,22 @@ jest.mock('./getJsonFrom', () => () => () =>
     },
   ]),
 );
+const mockPost = jest.fn();
+jest.mock('./postComment', () => () => () => mockPost);
 
 test('getComments should render', () => {
   const gitcomment = mount(
-    <Gitcomment repo="repo" issueNumber={1}>
-      {(loaded, comments) => {
+    <Gitcomment repo="repo" issueNumber={1} token="token">
+      {(loaded, comments, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
+        const handler = () => {
+          postComment('test');
+        };
         return (
           <div>
             <p className="loaded">{String(loaded)}</p>
             <ul className="comments">{commentList}</ul>
+            <button onClick={handler}>Post sthg</button>
           </div>
         );
       }}
@@ -45,5 +51,10 @@ test('getComments should render', () => {
     // test after componentDidMount
     expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
     expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
+
+    const btn = gitcomment.find('button');
+    expect(toJson(btn)).toMatchSnapshot();
+    btn.simulate('click');
+    setTimeout(() => expect(mockPost).toHaveBeenCalled(), 1);
   });
 });

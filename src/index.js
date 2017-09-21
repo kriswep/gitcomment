@@ -5,11 +5,21 @@ import 'whatwg-fetch';
 import makeGetJsonFrom from './getJsonFrom';
 import makeGetComments from './getComments';
 
+import makePostJsonTo from './postJsonTo';
+import makePostComment from './postComment';
+
 const getJsonFrom = makeGetJsonFrom({
   fetch: global.fetch,
 });
 const getComments = makeGetComments({
   getJsonFrom,
+});
+
+const postJsonTo = makePostJsonTo({
+  fetch: global.fetch,
+});
+const postComment = makePostComment({
+  postJsonTo,
 });
 
 class Gitcomment extends Component {
@@ -42,12 +52,30 @@ class Gitcomment extends Component {
     });
   }
 
+  postCommentToIssue(comment) {
+    postComment({
+      repo: this.props.repo,
+      issueNumber: this.props.issueNumber,
+      token: this.props.token,
+      comment,
+    });
+  }
+
   render() {
-    return <div>{this.props.children(this.state.loaded, this.state.comments)}</div>;
+    return (
+      <div>
+        {this.props.children(
+          this.state.loaded,
+          this.state.comments,
+          this.postCommentToIssue.bind(this), // eslint-disable-line react/jsx-no-bind
+        )}
+      </div>
+    );
   }
 }
-// const Gitcomment = ({ children }) => <div>{children('gitcomment to be done!')}</div>;
+
 Gitcomment.propTypes = {
+  token: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
   issueNumber: PropTypes.number.isRequired,
   children: PropTypes.func.isRequired,
