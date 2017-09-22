@@ -21,8 +21,8 @@ jest.mock('./getJsonFrom', () => () => () =>
     },
   ]),
 );
-const mockPost = jest.fn();
-jest.mock('./postComment', () => () => () => mockPost);
+const mockPostThenUpdateComments = jest.fn();
+jest.mock('./postComment', () => () => () => ({ then: mockPostThenUpdateComments }));
 
 test('getComments should render', () => {
   const gitcomment = mount(
@@ -55,6 +55,8 @@ test('getComments should render', () => {
     const btn = gitcomment.find('button');
     expect(toJson(btn)).toMatchSnapshot();
     btn.simulate('click');
-    setTimeout(() => expect(mockPost).toHaveBeenCalled(), 1);
+    expect(mockPostThenUpdateComments).toHaveBeenCalledTimes(1);
+    // should call getComment without failure
+    expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();
   });
 });

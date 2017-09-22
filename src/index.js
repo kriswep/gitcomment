@@ -32,6 +32,10 @@ class Gitcomment extends Component {
   }
 
   componentDidMount() {
+    this.updateComments();
+  }
+
+  updateComments() {
     getComments({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
@@ -58,7 +62,7 @@ class Gitcomment extends Component {
       issueNumber: this.props.issueNumber,
       token: this.props.token,
       comment,
-    });
+    }).then(() => this.updateComments());
   }
 
   render() {
