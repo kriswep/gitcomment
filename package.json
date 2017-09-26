@@ -11,12 +11,22 @@
     "lint": "eslint ./src",
     "prepublish": "npm run build"
   },
-  "keywords": ["comments"],
+  "keywords": [
+    "comments"
+  ],
   "author": "Christoph Benjamin Weber",
   "license": "MIT",
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!**/node_modules/**"],
-    "coverageReporters": ["json", "lcov", "text", "text-summary"]
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -42,12 +52,17 @@
   },
   "eslintConfig": {
     "extends": "airbnb",
-    "plugins": ["import"],
+    "plugins": [
+      "import"
+    ],
     "rules": {
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [".js", ".jsx"]
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
       ],
       "import/no-extraneous-dependencies": [
