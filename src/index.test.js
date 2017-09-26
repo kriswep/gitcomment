@@ -26,8 +26,11 @@ jest.mock('./postComment', () => () => () => ({ then: mockPostThenUpdateComments
 
 test('getComments should render', () => {
   const gitcomment = mount(
-    <Gitcomment repo="repo" issueNumber={1} token="token">
-      {(loaded, comments, postComment) => {
+    <Gitcomment
+      repo="repo"
+      issueNumber={1}
+      token="token"
+      render={(loaded, comments, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
         const handler = () => {
           postComment('test');
@@ -40,7 +43,7 @@ test('getComments should render', () => {
           </div>
         );
       }}
-    </Gitcomment>,
+    />,
   );
 
   // test before componentDidMount

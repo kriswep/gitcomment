@@ -11,8 +11,11 @@ import Gitcomment from 'gitcomment/dist/gitcomment';
 // }
 
 const App = () => (
-  <Gitcomment repo="kriswep/gitcomment" issueNumber={1} token={process.env.REACT_APP_GH_TOKEN}>
-    {(loaded, comments, postComment) => {
+  <Gitcomment
+    repo="kriswep/gitcomment"
+    issueNumber={1}
+    token={process.env.REACT_APP_GH_TOKEN}
+    render={(loaded, comments, postComment) => {
       const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
       const handler = () => {
         postComment('test');
@@ -34,7 +37,7 @@ const App = () => (
         </div>
       );
     }}
-  </Gitcomment>
+  />
 );
 
 export default App;

@@ -68,7 +68,7 @@ class Gitcomment extends Component {
   render() {
     return (
       <div>
-        {this.props.children(
+        {this.props.render(
           this.state.loaded,
           this.state.comments,
           this.postCommentToIssue.bind(this), // eslint-disable-line react/jsx-no-bind
@@ -82,7 +82,7 @@ Gitcomment.propTypes = {
   token: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
   issueNumber: PropTypes.number.isRequired,
-  children: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
 };
 
 export default Gitcomment;
