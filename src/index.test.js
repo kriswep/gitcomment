@@ -1,9 +1,12 @@
 /* globals jest test expect */
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import Gitcomment from './index';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('./getJsonFrom', () => () => () =>
   Promise.resolve([
@@ -52,12 +55,13 @@ test('getComments should render', () => {
 
   return Promise.resolve().then(() => {
     // test after componentDidMount
-    expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
-    expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
-
     const btn = gitcomment.find('button');
     expect(toJson(btn)).toMatchSnapshot();
     btn.simulate('click');
+
+    expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
+    expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
+
     expect(mockPostThenUpdateComments).toHaveBeenCalledTimes(1);
     // should call getComment without failure
     expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();

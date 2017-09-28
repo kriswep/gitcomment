@@ -15,6 +15,14 @@ exports[`getComments should render 2`] = `
 `;
 
 exports[`getComments should render 3`] = `
+<button
+  onClick={[Function]}
+>
+  Post sthg
+</button>
+`;
+
+exports[`getComments should render 4`] = `
 <p
   className="loaded"
 >
@@ -22,7 +30,7 @@ exports[`getComments should render 3`] = `
 </p>
 `;
 
-exports[`getComments should render 4`] = `
+exports[`getComments should render 5`] = `
 <ul
   className="comments"
 >
@@ -33,12 +41,4 @@ exports[`getComments should render 4`] = `
     body
   </li>
 </ul>
-`;
-
-exports[`getComments should render 5`] = `
-<button
-  onClick={[Function]}
->
-  Post sthg
-</button>
 `;
