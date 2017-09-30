@@ -20,9 +20,9 @@ class App extends Component {
   componentDidMount() {
     const { code } = queryString.parse(window.location.search);
     if (code) {
-      // lets pretend we have a gatekeepr instance on localhost:9999
+      // lets pretend we have a gatekeepr instance on https://gitcomment.now.sh/
       window
-        .fetch(`http://localhost:9999/authenticate/${code}`, {
+        .fetch(`https://gitcomment.now.sh/authenticate/${code}`, {
           method: 'GET',
         })
         .then(res => res.json())
