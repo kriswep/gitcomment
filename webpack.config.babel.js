@@ -9,7 +9,7 @@ module.exports = {
     filename: 'gitcomment.js',
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'gitcomment',
+    library: 'Gitcomment',
   },
   externals: {
     react: {
