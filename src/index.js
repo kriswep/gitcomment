@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import 'whatwg-fetch';
+// import 'whatwg-fetch';
 
 import makeGetJsonFrom from './getJsonFrom';
 import makeGetComments from './getComments';
