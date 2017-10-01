@@ -6,15 +6,21 @@
   "module": "src/index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack -p",
     "start": "webpack --watch",
     "lint": "eslint ./src",
     "prepublish": "npm run build"
   },
   "keywords": [
-    "comments"
+    "comments",
+    "comment",
+    "blog"
   ],
   "author": "Christoph Benjamin Weber",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriswep/gitcomment.git"
+  },
   "license": "MIT",
   "jest": {
     "collectCoverageFrom": [
