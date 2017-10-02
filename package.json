@@ -1,15 +1,15 @@
 {
   "name": "gitcomment",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "add comments to your blog with github issue backend",
   "main": "dist/gitcomment.js",
   "module": "src/index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack -p",
-    "start": "webpack --watch",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack --watch --config webpack.dev.js",
     "lint": "eslint ./src",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "keywords": ["comments", "comment", "blog"],
   "author": "Christoph Benjamin Weber",
@@ -28,6 +28,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.17",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "enzyme-to-json": "^3.0.1",
@@ -43,7 +44,10 @@
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
     "regenerator-runtime": "^0.11.0",
-    "webpack": "^3.6.0"
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-merge": "^4.1.0"
   },
   "eslintConfig": {
     "extends": "airbnb",

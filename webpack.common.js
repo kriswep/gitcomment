@@ -1,10 +1,12 @@
 const path = require('path');
-
-const production = process.env.NODE_ENV === 'production';
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
-  devtool: production ? false : 'eval-source-map',
+  entry: {
+    app: './src/index.js',
+  },
+  plugins: [new CleanWebpackPlugin(['dist'])],
   output: {
     filename: 'gitcomment.js',
     path: path.resolve(__dirname, 'dist'),
