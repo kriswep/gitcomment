@@ -1,12 +1,12 @@
 /* globals jest test expect */
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-16';
 
 import Gitcomment from './index';
 
-Enzyme.configure({ adapter: new Adapter() });
+// Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('./getJsonFrom', () => () => () =>
   Promise.resolve([
