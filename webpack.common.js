@@ -26,18 +26,17 @@ const config = {
       commonjs: 'prop-types',
       commonjs2: 'prop-types',
       amd: 'prop-types',
-      root: 'Prop-types',
+      root: 'PropTypes',
     },
   },
   module: {
     rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }],
   },
 };
+
+// add BundleAnalyzer if env varable ANALYZE was set
 if (process.env.ANALYZE) {
-  console.log('Analyze');
   config.plugins.push(new BundleAnalyzerPlugin());
-} else {
-  console.log('no analyze');
 }
 
 module.exports = config;
