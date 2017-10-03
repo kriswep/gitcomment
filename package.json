@@ -5,9 +5,10 @@
   "main": "dist/gitcomment.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "jest",
     "build": "webpack --config webpack.prod.js",
+    "coverage": "jest --coverage && codecov",
     "start": "webpack --watch --config webpack.dev.js",
+    "test": "jest",
     "lint": "eslint ./src",
     "prepare": "npm run build"
   },
@@ -46,6 +47,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
+    "codecov": "^2.3.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "enzyme-to-json": "^3.0.1",
