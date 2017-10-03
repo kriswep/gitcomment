@@ -1,6 +1,6 @@
 # gitcomment
 
-[![Build Status](https://travis-ci.org/kriswep/balloon.svg?branch=master)](https://travis-ci.org/kriswep/balloon)
+[![Build Status](https://travis-ci.org/kriswep/gitcomment.svg?branch=master)](https://travis-ci.org/kriswep/gitcomment)
 [![code coverage](https://codecov.io/gh/kriswep/gitcomment/branch/master/graph/badge.svg)](https://codecov.io/gh/kriswep/gitcomment)
 [![dependencies](https://david-dm.org/kriswep/gitcomment.svg)](https://david-dm.org/kriswep/gitcomment)
 
