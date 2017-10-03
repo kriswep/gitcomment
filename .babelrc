@@ -5,9 +5,18 @@
       {
         "targets": {
           "browsers": ["last 2 versions", "ie >= 11"]
-        }
+        },
+        "modules": false
       }
     ],
     "react"
-  ]
+  ],
+
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  },
+
+  "plugins": ["transform-react-remove-prop-types"]
 }
