@@ -1,6 +1,6 @@
 {
   "name": "gitcomment",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "add comments to your blog with github issue backend",
   "main": "dist/gitcomment.js",
   "module": "src/index.js",
@@ -11,7 +11,11 @@
     "lint": "eslint ./src",
     "prepare": "npm run build"
   },
-  "keywords": ["comments", "comment", "blog"],
+  "keywords": [
+    "comments",
+    "comment",
+    "blog"
+  ],
   "author": "Christoph Benjamin Weber",
   "repository": {
     "type": "git",
@@ -19,9 +23,20 @@
   },
   "license": "MIT",
   "jest": {
-    "setupFiles": ["./setup/rafShim.js", "./setup/jest.js"],
-    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!**/node_modules/**"],
-    "coverageReporters": ["json", "lcov", "text", "text-summary"]
+    "setupFiles": [
+      "./setup/rafShim.js",
+      "./setup/jest.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -54,12 +69,17 @@
   },
   "eslintConfig": {
     "extends": "airbnb",
-    "plugins": ["import"],
+    "plugins": [
+      "import"
+    ],
     "rules": {
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [".js", ".jsx"]
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
       ],
       "import/no-extraneous-dependencies": [
