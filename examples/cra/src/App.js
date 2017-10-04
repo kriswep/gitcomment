@@ -5,7 +5,7 @@ import Gitcomment from 'gitcomment/dist/gitcomment';
 
 const redirect = () =>
   window.location.replace(
-    `http://github.com/login/oauth/authorize?client_id=ce7fd0d5cdbd634de3aa&scope=repo%20user&redirect_uri=${window
+    `https://github.com/login/oauth/authorize?client_id=ce7fd0d5cdbd634de3aa&scope=repo%20user&redirect_uri=${window
       .location.href}test`,
   );
 
