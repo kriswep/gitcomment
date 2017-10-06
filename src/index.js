@@ -39,6 +39,7 @@ class Gitcomment extends Component {
     getComments({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
+      token: this.props.token,
     }).then((response) => {
       const comments = response.map(comment => ({
         id: comment.id,
