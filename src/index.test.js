@@ -27,12 +27,16 @@ jest.mock('./getJsonFrom', () => () => () =>
 const mockPostThenUpdateComments = jest.fn();
 jest.mock('./postComment', () => () => () => ({ then: mockPostThenUpdateComments }));
 
+global.localStorage = {
+  setItem: jest.fn(() => true),
+  getItem: jest.fn(() => 'token'),
+};
+
 test('getComments should render', () => {
   const gitcomment = mount(
     <Gitcomment
       repo="repo"
       issueNumber={1}
-      token="token"
       render={(loaded, comments, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
         const handler = () => {
@@ -65,5 +69,8 @@ test('getComments should render', () => {
     expect(mockPostThenUpdateComments).toHaveBeenCalledTimes(1);
     // should call getComment without failure
     expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();
+
+    gitcomment.setProps({ token: 'newToken' });
+    expect(gitcomment.state('token')).toEqual('newToken');
   });
 });

@@ -8,6 +8,8 @@ import makeGetComments from './getComments';
 import makePostJsonTo from './postJsonTo';
 import makePostComment from './postComment';
 
+const TOKEN_KEY = '_-GC_-GH_TOKEN';
+
 const getJsonFrom = makeGetJsonFrom({
   fetch: global.fetch,
 });
@@ -28,18 +30,32 @@ class Gitcomment extends Component {
     this.state = {
       loaded: false,
       comments: [],
+      token: this.props.token || global.localStorage.getItem(TOKEN_KEY),
     };
   }
 
   componentDidMount() {
+    this.saveToken(this.props.token);
     this.updateComments();
+  }
+
+  componentWillReceiveProps({ token }) {
+    this.saveToken(token);
+  }
+
+  saveToken(token) {
+    return (
+      token &&
+      token !== global.localStorage.getItem(TOKEN_KEY) &&
+      (global.localStorage.setItem(TOKEN_KEY, token) && this.setState({ token }))
+    );
   }
 
   updateComments() {
     getComments({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
-      token: this.props.token,
+      token: this.state.token,
     }).then((response) => {
       const comments = response.map(comment => ({
         id: comment.id,
@@ -61,7 +77,7 @@ class Gitcomment extends Component {
     postComment({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
-      token: this.props.token,
+      token: this.state.token,
       comment,
     }).then(() => this.updateComments());
   }
@@ -80,10 +96,13 @@ class Gitcomment extends Component {
 }
 
 Gitcomment.propTypes = {
-  token: PropTypes.string.isRequired,
+  token: PropTypes.string,
   repo: PropTypes.string.isRequired,
   issueNumber: PropTypes.number.isRequired,
   render: PropTypes.func.isRequired,
+};
+Gitcomment.defaultProps = {
+  token: undefined,
 };
 
 export default Gitcomment;
