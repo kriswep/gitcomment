@@ -8,6 +8,19 @@ const makePostJsonTo = ({ fetch }) => (uri, token, json) =>
       Authorization: `token ${token}`,
     },
     body: json,
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        JSON.stringify({
+          status: res.status,
+          statusText: res.statusText,
+          'X-RateLimit-Limit': res.headers.get('X-RateLimit-Limit'),
+          'X-RateLimit-Remaining': res.headers.get('X-RateLimit-Limit'),
+          'X-RateLimit-Reset': res.headers.get('X-RateLimit-Limit'),
+        }),
+      );
+    }
+    return res;
   });
 
 export default makePostJsonTo;

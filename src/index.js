@@ -51,26 +51,37 @@ class Gitcomment extends Component {
     );
   }
 
+  handleError(e) {
+    if (!(e instanceof TypeError) && JSON.parse(e.message).status === 401) {
+      global.localStorage.setItem(TOKEN_KEY, '');
+      this.setState({ token: '' });
+      return this.props.requireAuth && this.props.requireAuth(JSON.parse(e.message));
+    }
+    return this.props.error && this.props.error(e);
+  }
+
   updateComments() {
     getComments({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
       token: this.state.token,
-    }).then((response) => {
-      const comments = response.map(comment => ({
-        id: comment.id,
-        body: comment.body,
-        created: comment.created_at,
-        updated: comment.updated_at,
-        url: comment.url,
-        author: {
-          name: comment.user.login,
-          avatar: comment.user.avatar_url,
-          url: comment.user.url,
-        },
-      }));
-      return this.setState({ loaded: true, comments });
-    });
+    })
+      .then((response) => {
+        const comments = response.map(comment => ({
+          id: comment.id,
+          body: comment.body,
+          created: comment.created_at,
+          updated: comment.updated_at,
+          url: comment.url,
+          author: {
+            name: comment.user.login,
+            avatar: comment.user.avatar_url,
+            url: comment.user.url,
+          },
+        }));
+        return this.setState({ loaded: true, comments });
+      })
+      .catch(this.handleError.bind(this));
   }
 
   postCommentToIssue(comment) {
@@ -79,7 +90,9 @@ class Gitcomment extends Component {
       issueNumber: this.props.issueNumber,
       token: this.state.token,
       comment,
-    }).then(() => this.updateComments());
+    })
+      .catch(this.handleError.bind(this))
+      .then(() => this.updateComments());
   }
 
   render() {
@@ -100,9 +113,13 @@ Gitcomment.propTypes = {
   repo: PropTypes.string.isRequired,
   issueNumber: PropTypes.number.isRequired,
   render: PropTypes.func.isRequired,
+  error: PropTypes.func,
+  requireAuth: PropTypes.func,
 };
 Gitcomment.defaultProps = {
   token: undefined,
+  error: undefined,
+  requireAuth: undefined,
 };
 
 export default Gitcomment;
