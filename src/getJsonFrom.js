@@ -16,8 +16,8 @@ const makeGetJsonFrom = ({ fetch }) => (uri, token) => {
           status: res.status,
           statusText: res.statusText,
           'X-RateLimit-Limit': res.headers.get('X-RateLimit-Limit'),
-          'X-RateLimit-Remaining': res.headers.get('X-RateLimit-Limit'),
-          'X-RateLimit-Reset': res.headers.get('X-RateLimit-Limit'),
+          'X-RateLimit-Remaining': res.headers.get('X-RateLimit-Remaining'),
+          'X-RateLimit-Reset': res.headers.get('X-RateLimit-Reset'),
         }),
       );
     }
