@@ -25,7 +25,12 @@ jest.mock('./getJsonFrom', () => () => () =>
   ]),
 );
 const mockPostThenUpdateComments = jest.fn();
-jest.mock('./postComment', () => () => () => ({ then: mockPostThenUpdateComments }));
+const mockPostCatchUpdateComments = jest.fn(() => ({
+  then: mockPostThenUpdateComments,
+}));
+jest.mock('./postComment', () => () => () => ({
+  catch: mockPostCatchUpdateComments,
+}));
 
 global.localStorage = {
   setItem: jest.fn(() => true),
@@ -33,10 +38,14 @@ global.localStorage = {
 };
 
 test('getComments should render', () => {
+  const errHandler = jest.fn();
+  const requireAuthHandler = jest.fn();
   const gitcomment = mount(
     <Gitcomment
       repo="repo"
       issueNumber={1}
+      error={errHandler}
+      requireAuth={requireAuthHandler}
       render={(loaded, comments, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
         const handler = () => {
@@ -72,5 +81,16 @@ test('getComments should render', () => {
 
     gitcomment.setProps({ token: 'newToken' });
     expect(gitcomment.state('token')).toEqual('newToken');
+
+    // test handleError instance method
+    gitcomment.instance().handleError({ message: '{ "status": 500 }' });
+    gitcomment.instance().handleError({ message: '{ "status": 401 }' });
+
+    expect(errHandler).toHaveBeenCalled();
+    expect(errHandler).toHaveBeenCalled();
   });
 });
+
+// test('getComments should render', () => {
+
+// });
