@@ -7,9 +7,9 @@ test('postComment should post Json to gh', () => {
     postJsonTo,
   });
 
-  expect(
-    postComment.bind(null, { repo: 'repo', issueNumber: 1, token: 'token', comment: 'comment' }),
-  ).not.toThrow();
+  expect(postComment.bind(null, {
+    repo: 'repo', issueNumber: 1, token: 'token', comment: 'comment',
+  })).not.toThrow();
 
   expect(postJsonTo).toHaveBeenCalledWith(
     'https://api.github.com/repos/repo/issues/1/comments',

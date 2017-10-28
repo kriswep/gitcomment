@@ -95,8 +95,7 @@ class Gitcomment extends Component {
             avatar: user.avatar_url,
             url: user.html_url,
           },
-        }),
-      )
+        }))
       .catch(this.handleError.bind(this));
   }
 

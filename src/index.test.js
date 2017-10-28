@@ -22,8 +22,7 @@ jest.mock('./getJsonFrom', () => () => () =>
         url: 'url',
       },
     },
-  ]),
-);
+  ]));
 const mockPostThenUpdateComments = jest.fn();
 const mockPostCatchUpdateComments = jest.fn(() => ({
   then: mockPostThenUpdateComments,
@@ -40,13 +39,12 @@ global.localStorage = {
 test('gitcomment should render', () => {
   const errHandler = jest.fn();
   const requireAuthHandler = jest.fn();
-  const gitcomment = mount(
-    <Gitcomment
-      repo="repo"
-      issueNumber={1}
-      error={errHandler}
-      requireAuth={requireAuthHandler}
-      render={(loaded, comments, user, postComment) => {
+  const gitcomment = mount(<Gitcomment
+    repo="repo"
+    issueNumber={1}
+    error={errHandler}
+    requireAuth={requireAuthHandler}
+    render={(loaded, comments, user, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
         const handler = () => {
           postComment('test');
@@ -60,8 +58,7 @@ test('gitcomment should render', () => {
           </div>
         );
       }}
-    />,
-  );
+  />);
 
   // test before componentDidMount
   expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
