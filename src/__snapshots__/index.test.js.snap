@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getComments should render 1`] = `
+exports[`gitcomment should render 1`] = `
 <p
   className="loaded"
 >
@@ -8,13 +8,13 @@ exports[`getComments should render 1`] = `
 </p>
 `;
 
-exports[`getComments should render 2`] = `
+exports[`gitcomment should render 2`] = `
 <ul
   className="comments"
 />
 `;
 
-exports[`getComments should render 3`] = `
+exports[`gitcomment should render 3`] = `
 <button
   onClick={[Function]}
 >
@@ -22,7 +22,7 @@ exports[`getComments should render 3`] = `
 </button>
 `;
 
-exports[`getComments should render 4`] = `
+exports[`gitcomment should render 4`] = `
 <p
   className="loaded"
 >
@@ -30,7 +30,7 @@ exports[`getComments should render 4`] = `
 </p>
 `;
 
-exports[`getComments should render 5`] = `
+exports[`gitcomment should render 5`] = `
 <ul
   className="comments"
 >

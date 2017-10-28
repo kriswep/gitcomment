@@ -36,7 +36,7 @@ class App extends Component {
         repo="kriswep/gitcomment"
         issueNumber={1}
         token={this.state.token || process.env.REACT_APP_GH_TOKEN}
-        render={(loaded, comments, postComment) => {
+        render={(loaded, comments, user, postComment) => {
           const commentList = comments.map(comment => (
             <li key={comment.id}>body: {comment.body}</li>
           ));
@@ -46,6 +46,7 @@ class App extends Component {
           return (
             <div>
               <p>loaded: {String(loaded)}</p>
+              <p>user: {user.login}</p>
               <ul>{commentList}</ul>
               <button onClick={handler}>Post sthg</button>
               <button onClick={redirect}>Login</button>

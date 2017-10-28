@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import makeGetJsonFrom from './getJsonFrom';
 import makeGetComments from './getComments';
+import makeGetUser from './getUser';
 
 import makePostJsonTo from './postJsonTo';
 import makePostComment from './postComment';
@@ -14,6 +15,9 @@ const getJsonFrom = makeGetJsonFrom({
   fetch: global.fetch,
 });
 const getComments = makeGetComments({
+  getJsonFrom,
+});
+const getUser = makeGetUser({
   getJsonFrom,
 });
 
@@ -30,6 +34,7 @@ class Gitcomment extends Component {
     this.state = {
       loaded: false,
       comments: [],
+      user: {},
       token: this.props.token || global.localStorage.getItem(TOKEN_KEY),
     };
   }
@@ -74,13 +79,24 @@ class Gitcomment extends Component {
           updated: comment.updated_at,
           url: comment.url,
           author: {
-            name: comment.user.login,
+            login: comment.user.login,
             avatar: comment.user.avatar_url,
-            url: comment.user.url,
+            url: comment.user.html_url,
           },
         }));
         return this.setState({ loaded: true, comments });
       })
+      .then(() => getUser({ token: this.state.token }))
+      .then(user =>
+        this.setState({
+          user: {
+            login: user.login,
+            name: user.name,
+            avatar: user.avatar_url,
+            url: user.html_url,
+          },
+        }),
+      )
       .catch(this.handleError.bind(this));
   }
 
@@ -101,6 +117,7 @@ class Gitcomment extends Component {
         {this.props.render(
           this.state.loaded,
           this.state.comments,
+          this.state.user,
           this.postCommentToIssue.bind(this), // eslint-disable-line react/jsx-no-bind
         )}
       </div>

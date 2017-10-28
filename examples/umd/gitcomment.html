@@ -18,12 +18,13 @@
     <div>
       <h1>Gitcomment test</h1>
 
-      <Gitcomment.default repo="kriswep/gitcomment" issueNumber={1} token={ 'invalid'} render={(loaded, comments, postComment)=>
+      <Gitcomment.default repo="kriswep/gitcomment" issueNumber={1} token={ 'invalid'} render={(loaded, comments, user, postComment)=>
         { const commentList = comments.map(comment => (
         <li key={comment.id}>body: {comment.body}</li>
         )); return (
         <div>
           <p>loaded: {String(loaded)}</p>
+          <p>user: {user.login}</p>
           <ul>{commentList}</ul>
         </div>
         ); }} />

@@ -37,7 +37,7 @@ global.localStorage = {
   getItem: jest.fn(() => 'token'),
 };
 
-test('getComments should render', () => {
+test('gitcomment should render', () => {
   const errHandler = jest.fn();
   const requireAuthHandler = jest.fn();
   const gitcomment = mount(
@@ -46,7 +46,7 @@ test('getComments should render', () => {
       issueNumber={1}
       error={errHandler}
       requireAuth={requireAuthHandler}
-      render={(loaded, comments, postComment) => {
+      render={(loaded, comments, user, postComment) => {
         const commentList = comments.map(comment => <li key={comment.id}>body: {comment.body}</li>);
         const handler = () => {
           postComment('test');
@@ -54,6 +54,7 @@ test('getComments should render', () => {
         return (
           <div>
             <p className="loaded">{String(loaded)}</p>
+            <p>user: {user.login}</p>
             <ul className="comments">{commentList}</ul>
             <button onClick={handler}>Post sthg</button>
           </div>
