@@ -18,7 +18,7 @@
     <div>
       <h1>Gitcomment test</h1>
 
-      <Gitcomment.default repo="kriswep/gitcomment" issueNumber={1} token={ 'invalid'} render={(loaded, comments, user, postComment)=>
+      <Gitcomment.default repo="kriswep/gitcomment" issueNumber={1} render={(loaded, comments, user, postComment)=>
         { const commentList = comments.map(comment => (
         <li key={comment.id}>body: {comment.body}</li>
         )); return (
