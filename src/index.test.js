@@ -32,7 +32,7 @@ jest.mock('./postComment', () => () => () => ({
 }));
 
 global.localStorage = {
-  setItem: jest.fn(() => true),
+  setItem: jest.fn(() => undefined),
   getItem: jest.fn(() => 'token'),
 };
 
@@ -65,7 +65,6 @@ test('gitcomment should render', () => {
   expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
 
   return Promise.resolve().then(() => {
-    debugger; //eslint-disable-line
     // test after componentDidMount
     const btn = gitcomment.find('button');
     expect(toJson(btn)).toMatchSnapshot();
@@ -78,15 +77,9 @@ test('gitcomment should render', () => {
     // should call getComment without failure
     expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();
 
+    // change token
     gitcomment.setProps({ token: 'newToken' });
     expect(gitcomment.state('token')).toEqual('newToken');
-
-    // test saveToken instance method
-    // gitcomment.instance().saveToken('newToken');
-    // setTimeout(() => {
-    //   console.log('SDFDSFDSFDSF');
-    //   expect(gitcomment.state('token')).toEqual('newToken');
-    // }, 5);
 
     // test handleError instance method
     gitcomment.instance().handleError({ message: '{ "status": 500 }' });
@@ -97,10 +90,6 @@ test('gitcomment should render', () => {
 
     return gitcomment.instance().saveToken('newToken');
   });
-  // .then(() => setTimeout(() => {
-  //   expect(gitcomment.state('token')).toEqual('newToken');
-  // }, 50));
-  // .then(() => expect(gitcomment.state('token')).toEqual('newToken'))
 });
 
 // test('getComments should render', () => {
