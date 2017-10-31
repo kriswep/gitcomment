@@ -65,6 +65,7 @@ test('gitcomment should render', () => {
   expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
 
   return Promise.resolve().then(() => {
+    debugger; //eslint-disable-line
     // test after componentDidMount
     const btn = gitcomment.find('button');
     expect(toJson(btn)).toMatchSnapshot();
@@ -80,13 +81,26 @@ test('gitcomment should render', () => {
     gitcomment.setProps({ token: 'newToken' });
     expect(gitcomment.state('token')).toEqual('newToken');
 
+    // test saveToken instance method
+    // gitcomment.instance().saveToken('newToken');
+    // setTimeout(() => {
+    //   console.log('SDFDSFDSFDSF');
+    //   expect(gitcomment.state('token')).toEqual('newToken');
+    // }, 5);
+
     // test handleError instance method
     gitcomment.instance().handleError({ message: '{ "status": 500 }' });
     gitcomment.instance().handleError({ message: '{ "status": 401 }' });
 
     expect(errHandler).toHaveBeenCalled();
     expect(errHandler).toHaveBeenCalled();
+
+    return gitcomment.instance().saveToken('newToken');
   });
+  // .then(() => setTimeout(() => {
+  //   expect(gitcomment.state('token')).toEqual('newToken');
+  // }, 50));
+  // .then(() => expect(gitcomment.state('token')).toEqual('newToken'))
 });
 
 // test('getComments should render', () => {

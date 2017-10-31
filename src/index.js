@@ -52,7 +52,8 @@ class Gitcomment extends Component {
     return (
       token &&
       token !== global.localStorage.getItem(TOKEN_KEY) &&
-      (global.localStorage.setItem(TOKEN_KEY, token) && this.setState({ token }))
+      (global.localStorage.setItem(TOKEN_KEY, token) || true) &&
+      this.setState({ token })
     );
   }
 

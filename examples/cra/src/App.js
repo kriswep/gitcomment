@@ -26,7 +26,10 @@ class App extends Component {
           method: 'GET',
         })
         .then(res => res.json())
-        .then(({ token }) => this.setState({ token }));
+        .then(({ token }) =>
+          //
+          this.setState({ token }),
+        );
     }
   }
 
