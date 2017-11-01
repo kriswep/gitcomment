@@ -12,11 +12,7 @@
     "lint": "eslint ./src",
     "prepare": "npm run build"
   },
-  "keywords": [
-    "comments",
-    "comment",
-    "blog"
-  ],
+  "keywords": ["comments", "comment", "blog"],
   "author": "Christoph Benjamin Weber",
   "repository": {
     "type": "git",
@@ -24,25 +20,16 @@
   },
   "license": "MIT",
   "jest": {
-    "setupFiles": [
-      "./setup/rafShim.js",
-      "./setup/jest.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/node_modules/**"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "text-summary"
-    ]
+    "setupFiles": ["./setup/rafShim.js", "./setup/jest.js"],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!**/node_modules/**"],
+    "coverageReporters": ["json", "lcov", "text", "text-summary"]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -70,18 +57,14 @@
     "webpack-merge": "^4.1.0"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "extends": "airbnb",
-    "plugins": [
-      "import"
-    ],
+    "plugins": ["import"],
     "rules": {
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
+          "extensions": [".js", ".jsx"]
         }
       ],
       "import/no-extraneous-dependencies": [

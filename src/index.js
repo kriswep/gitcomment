@@ -38,6 +38,12 @@ class Gitcomment extends Component {
       token: this.props.token || global.localStorage.getItem(TOKEN_KEY),
     };
   }
+  // state = {
+  //   loaded: false,
+  //   comments: [],
+  //   user: {},
+  //   token: global.localStorage.getItem(TOKEN_KEY),
+  // };
 
   componentDidMount() {
     this.saveToken(this.props.token);
@@ -100,7 +106,7 @@ class Gitcomment extends Component {
       .catch(this.handleError.bind(this));
   }
 
-  postCommentToIssue(comment) {
+  postCommentToIssue = (comment) => {
     postComment({
       repo: this.props.repo,
       issueNumber: this.props.issueNumber,
@@ -109,7 +115,7 @@ class Gitcomment extends Component {
     })
       .catch(this.handleError.bind(this))
       .then(() => this.updateComments());
-  }
+  };
 
   render() {
     return (
@@ -118,7 +124,7 @@ class Gitcomment extends Component {
           this.state.loaded,
           this.state.comments,
           this.state.user,
-          this.postCommentToIssue.bind(this), // eslint-disable-line react/jsx-no-bind
+          this.postCommentToIssue,
         )}
       </div>
     );

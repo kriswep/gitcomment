@@ -18,5 +18,5 @@
     }
   },
 
-  "plugins": ["transform-react-remove-prop-types"]
+  "plugins": ["transform-react-remove-prop-types", "transform-class-properties"]
 }
