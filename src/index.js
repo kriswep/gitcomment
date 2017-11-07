@@ -35,15 +35,9 @@ class Gitcomment extends Component {
       loaded: false,
       comments: [],
       user: {},
-      token: this.props.token || global.localStorage.getItem(TOKEN_KEY),
+      token: this.props.token || (global.localStorage && global.localStorage.getItem(TOKEN_KEY)),
     };
   }
-  // state = {
-  //   loaded: false,
-  //   comments: [],
-  //   user: {},
-  //   token: global.localStorage.getItem(TOKEN_KEY),
-  // };
 
   componentDidMount() {
     this.saveToken(this.props.token);

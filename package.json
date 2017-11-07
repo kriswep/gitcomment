@@ -12,7 +12,11 @@
     "lint": "eslint ./src",
     "prepare": "npm run build"
   },
-  "keywords": ["comments", "comment", "blog"],
+  "keywords": [
+    "comments",
+    "comment",
+    "blog"
+  ],
   "author": "Christoph Benjamin Weber",
   "repository": {
     "type": "git",
@@ -20,9 +24,20 @@
   },
   "license": "MIT",
   "jest": {
-    "setupFiles": ["./setup/rafShim.js", "./setup/jest.js"],
-    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!**/node_modules/**"],
-    "coverageReporters": ["json", "lcov", "text", "text-summary"]
+    "setupFiles": [
+      "./setup/rafShim.js",
+      "./setup/jest.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -59,12 +74,17 @@
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": "airbnb",
-    "plugins": ["import"],
+    "plugins": [
+      "import"
+    ],
     "rules": {
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [".js", ".jsx"]
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
         }
       ],
       "import/no-extraneous-dependencies": [
