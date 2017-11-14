@@ -33,7 +33,7 @@ jest.mock('./postComment', () => () => () => ({
 
 global.localStorage = {
   setItem: jest.fn(() => undefined),
-  getItem: jest.fn(() => 'token'),
+  getItem: jest.fn(() => undefined),
 };
 
 test('gitcomment should render', () => {
@@ -64,32 +64,35 @@ test('gitcomment should render', () => {
   expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
   expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
 
-  return Promise.resolve().then(() => {
-    // test after componentDidMount
-    const btn = gitcomment.find('button');
-    expect(toJson(btn)).toMatchSnapshot();
-    btn.simulate('click');
+  return Promise.resolve()
+    .then(() => {
+      // test after componentDidMount
+      const btn = gitcomment.find('button');
+      expect(toJson(btn)).toMatchSnapshot();
+      btn.simulate('click');
+    })
+    .then(() => {
+      expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
+      expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
 
-    expect(toJson(gitcomment.find('.loaded'))).toMatchSnapshot();
-    expect(toJson(gitcomment.find('.comments'))).toMatchSnapshot();
+      expect(mockPostThenUpdateComments).toHaveBeenCalledTimes(1);
+      // should call getComment without failure
+      expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();
+    })
+    .then(() => {
+      // change token
+      gitcomment.setProps({ token: 'newToken' });
+      expect(gitcomment.state('token')).toEqual('newToken');
 
-    expect(mockPostThenUpdateComments).toHaveBeenCalledTimes(1);
-    // should call getComment without failure
-    expect(mockPostThenUpdateComments.mock.calls[0][0]).not.toThrow();
+      // test handleError instance method
+      gitcomment.instance().handleError({ message: '{ "status": 500 }' });
+      gitcomment.instance().handleError({ message: '{ "status": 401 }' });
 
-    // change token
-    gitcomment.setProps({ token: 'newToken' });
-    expect(gitcomment.state('token')).toEqual('newToken');
+      expect(errHandler).toHaveBeenCalled();
+      expect(errHandler).toHaveBeenCalled();
 
-    // test handleError instance method
-    gitcomment.instance().handleError({ message: '{ "status": 500 }' });
-    gitcomment.instance().handleError({ message: '{ "status": 401 }' });
-
-    expect(errHandler).toHaveBeenCalled();
-    expect(errHandler).toHaveBeenCalled();
-
-    return gitcomment.instance().saveToken('newToken');
-  });
+      return gitcomment.instance().saveToken('newToken');
+    });
 });
 
 // test('getComments should render', () => {

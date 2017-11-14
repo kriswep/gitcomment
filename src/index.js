@@ -48,6 +48,13 @@ class Gitcomment extends Component {
     this.saveToken(token);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // update comments if auth status changes
+    if (prevState.token !== this.state.token) {
+      this.updateComments();
+    }
+  }
+
   saveToken(token) {
     return (
       token &&
@@ -87,16 +94,25 @@ class Gitcomment extends Component {
         }));
         return this.setState({ loaded: true, comments });
       })
-      .then(() => getUser({ token: this.state.token }))
-      .then(user =>
-        this.setState({
-          user: {
-            login: user.login,
-            name: user.name,
-            avatar: user.avatar_url,
-            url: user.html_url,
-          },
-        }))
+      .then(() => {
+        if (this.state.token) {
+          return getUser({ token: this.state.token });
+        }
+        return null;
+      })
+      .then((user) => {
+        if (user) {
+          return this.setState({
+            user: {
+              login: user.login,
+              name: user.name,
+              avatar: user.avatar_url,
+              url: user.html_url,
+            },
+          });
+        }
+        return null;
+      })
       .catch(this.handleError.bind(this));
   }
 
