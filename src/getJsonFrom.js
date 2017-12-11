@@ -1,6 +1,5 @@
 const makeGetJsonFrom = ({ fetch }) => (uri, token) => {
   let headers = {
-    'User-Agent': 'Gitcomment',
     Accept: 'application/vnd.github.v3.full+json',
   };
   if (token) {
