@@ -1,6 +1,6 @@
 {
   "name": "gitcomment",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "add comments to your blog with github issue backend",
   "main": "dist/gitcomment.js",
   "module": "src/index.js",
